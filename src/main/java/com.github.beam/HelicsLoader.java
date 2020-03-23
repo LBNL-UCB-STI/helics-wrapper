@@ -25,6 +25,13 @@ public class HelicsLoader {
 
         String libname = System.mapLibraryName("helicsJava");
 
+
+        // this is required because for windows we need to manually
+        // load all dependencies before loading actual library
+        if (libraryArchive.contains("win")) {
+            System.load(Paths.get(tempDir.getAbsolutePath(), "helicsSharedLib.dll").toString());
+        }
+
         System.load(Paths.get(tempDir.getAbsolutePath(), libname).toString());
     }
 
