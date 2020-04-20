@@ -14,7 +14,7 @@ public class HelicsLoader {
     private static final String windows64 = "win-64.zip";
 
     public static void load() {
-        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+        File tempDir = Paths.get(System.getProperty("java.io.tmpdir"), "helics").toFile();
 
         tempDir.mkdirs();
         tempDir.deleteOnExit();
@@ -26,12 +26,14 @@ public class HelicsLoader {
         String libname = System.mapLibraryName("helicsJava");
 
 
-        // this is required because for windows we need to manually
+        // this is required because for windows and linux we need to manually
         // load all dependencies before loading actual library
         if (libraryArchive.contains("win")) {
             System.load(Paths.get(tempDir.getAbsolutePath(), "helicsSharedLib.dll").toString());
+        } else if (libraryArchive.contains(unix)) {
+            System.load(Paths.get(tempDir.getAbsolutePath(), "libzmq.so.5").toString());
+            System.load(Paths.get(tempDir.getAbsolutePath(), "libhelicsSharedLib.so.2").toString());
         }
-
         System.load(Paths.get(tempDir.getAbsolutePath(), libname).toString());
     }
 
