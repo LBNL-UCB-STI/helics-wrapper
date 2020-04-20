@@ -14,7 +14,7 @@ public class HelicsLoader {
     private static final String windows64 = "win-64.zip";
 
     public static void load() {
-        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+        File tempDir = Paths.get(System.getProperty("java.io.tmpdir"), "helics").toFile();
 
         tempDir.mkdirs();
         tempDir.deleteOnExit();
