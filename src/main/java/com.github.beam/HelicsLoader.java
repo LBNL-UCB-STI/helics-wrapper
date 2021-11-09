@@ -9,6 +9,7 @@ import java.util.zip.ZipInputStream;
 
 public class HelicsLoader {
     private static final String mac = "mac.zip";
+    private static final String mac_arm64 = "mac-arm64.zip";
     private static final String unix = "unix.zip";
     private static final String windows32 = "win-32.zip";
     private static final String windows64 = "win-64.zip";
@@ -78,7 +79,10 @@ public class HelicsLoader {
         }
 
         if (os.contains("mac"))
-            return mac;
+            if (System.getProperty("os.arch").contains("aarch64"))
+                return mac_arm64;
+            else
+                return mac;
 
         if (os.contains("nix") || os.contains("nux"))
             return unix;
