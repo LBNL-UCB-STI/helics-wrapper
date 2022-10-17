@@ -15,7 +15,7 @@ public class HelicsExample {
         if (helics.helicsBrokerIsConnected(broker) == 1) System.out.println("Broker is connected");
         else System.out.println("ERROR! Broker is NOT connected");
 
-        testMesageSendAndTimeSync();
+        testMessageSendAndTimeSync();
 
         sleep();
         System.out.println("Destroying broker ...");
@@ -30,7 +30,7 @@ public class HelicsExample {
         System.out.println("Done");
     }
 
-    private static void testMesageSendAndTimeSync() throws InterruptedException {
+    private static void testMessageSendAndTimeSync() throws InterruptedException {
         SWIGTYPE_p_void fedInfo = getFederateInfo();
         String fedName = "FED_BEAM_1";
         SWIGTYPE_p_void fedComb = helics.helicsCreateCombinationFederate(fedName, fedInfo);
@@ -41,7 +41,10 @@ public class HelicsExample {
         SWIGTYPE_p_void publication = helics.helicsFederateRegisterPublication(fedComb, publicationName, dataType, "");
         System.out.println("Registered publication.");
 
-        System.out.println("To enter execution mode we need to have a running instance of helics. Entering execution mode ...");
+        String longMessage = "To enter execution mode we need to have python scripts manually running "
+                + "(beam_pydss_broker.py and site_power_controller_federate.py)."
+                + "Entering execution mode ...";
+        System.out.println(longMessage);
         helics.helicsFederateEnterExecutingMode(fedComb);
         System.out.println("Entered execution mode.");
 
