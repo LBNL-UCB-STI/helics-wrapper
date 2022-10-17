@@ -11,8 +11,8 @@ public class HelicsLoader {
     private static final String mac = "mac.zip";
     private static final String mac_arm64 = "mac-arm64.zip";
     private static final String unix = "unix.zip";
-    private static final String windows32 = "win-32.zip";
-    private static final String windows64 = "win-64.zip";
+    private static final String windows32 = "win32.zip";
+    private static final String windows64 = "win64.zip";
 
     private static void loadLibrary(File basePath, String libraryName) {
         String libraryPath = Paths.get(basePath.getAbsolutePath(), libraryName).toString();
