@@ -3,3 +3,8 @@ out
 .idea
 .gradle
 .DS_Store
+src/main/shell/downloads
+src/main/shell/archives
+src/main/resources/helics-binaries/_*
+src/main/shell/libhelicsJava.so
+helics/
