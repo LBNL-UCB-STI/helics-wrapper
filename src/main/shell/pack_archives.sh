@@ -17,8 +17,9 @@ mv $os.zip ../../resources/helics-binaries/$os.zip
 
 os="mac" && rm -rf $os && mkdir $os
 cp ../downloads/regular/*macOS*/java/libhelicsJava.dylib $os/libhelicsJava.dylib
-cp ../downloads/shared/*macOS*/lib/libhelics.dylib $os/libhelicsSharedLib.dylib
+cp ../downloads/regular/*macOS*/lib/libhelics.3.dylib $os/libhelics.3.dylib
 cp ../downloads/regular/*macOS*/lib/libzmq.dylib $os/libzmq.dylib
+cp ../downloads/shared/*macOS*/lib/libhelics.dylib $os/libhelicsSharedLib.dylib
 cd $os && zip ../$os.zip * && cd ..
 cp $os.zip ../../resources/helics-binaries/$os.zip
 # it is called 'universal' in downloads, so, probably, the archive should be the same
