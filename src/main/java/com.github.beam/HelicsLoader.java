@@ -11,8 +11,19 @@ public class HelicsLoader {
     private static final String mac = "mac.zip";
     private static final String mac_arm64 = "mac-arm64.zip";
     private static final String unix = "unix.zip";
-    private static final String windows32 = "win-32.zip";
-    private static final String windows64 = "win-64.zip";
+    private static final String windows32 = "win32.zip";
+    private static final String windows64 = "win64.zip";
+
+    private static void loadLibrary(File basePath, String libraryName) {
+        String libraryPath = Paths.get(basePath.getAbsolutePath(), libraryName).toString();
+        try {
+            System.load(libraryPath);
+            System.out.println("Loaded " + libraryPath);
+        } catch (Exception ex) {
+            System.out.println("Was not able to load " + libraryPath);
+            throw new RuntimeException(ex);
+        }
+    }
 
     public static void load() {
         File tempDir = Paths.get(System.getProperty("java.io.tmpdir"), "helics").toFile();
@@ -26,16 +37,15 @@ public class HelicsLoader {
 
         String libname = System.mapLibraryName("helicsJava");
 
-
         // this is required because for windows and linux we need to manually
         // load all dependencies before loading actual library
         if (libraryArchive.contains("win")) {
-            System.load(Paths.get(tempDir.getAbsolutePath(), "helicsSharedLib.dll").toString());
+            loadLibrary(tempDir, "helicsSharedLib.dll");
         } else if (libraryArchive.contains(unix)) {
-            System.load(Paths.get(tempDir.getAbsolutePath(), "libzmq.so.5").toString());
-            System.load(Paths.get(tempDir.getAbsolutePath(), "libhelicsSharedLib.so.2").toString());
+            loadLibrary(tempDir, "libzmq.so");
+            loadLibrary(tempDir, "libhelicsSharedLib.so");
         }
-        System.load(Paths.get(tempDir.getAbsolutePath(), libname).toString());
+        loadLibrary(tempDir, libname);
     }
 
     private static void unzipLibArchive(File directory, String libraryArchive) {
