@@ -3,8 +3,6 @@
 unpack_and_delete_archives() {
   for f in *.zip; do unzip "$f"; done
   for f in *.tar.gz; do tar -xvzf "$f"; done
-  # for f in *.gz; do gunzip "$f"; done
-  # for f in *tar; do tar -xvf "$f"; done
 
   rm *.zip *.tar
 }
