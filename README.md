@@ -11,7 +11,8 @@
 ### Update library
 1. Download distributions from release page with a shell script - `src/main/shell/download_distributions.sh`
 2. Copy `helics.jar` to the `libs` folder of the project. The jar file might be copied from macOS, win32, win64 distributions (from java folder) or might be built with docker image together with `libhelicsJava.so`.
-3. Zip all libraries from `share` and `java` and put them to resources with related naming with a shell script - `src/main/shell/pack_archives.sh`
+3. Build `libhelicsJava.so` for unix and make sure `libhelicsJava.so` is copied to `src/main/shell` before going to the next step, otherwise `unix.zip` will be incomplete.
+4. Zip all libraries and put them to resources with a shell script - `src/main/shell/pack_archives.sh`
 
 ### Building libhelicsJava.so for Ubuntu
 - Run helics builder docker image with interactive bash `docker run -v C:\temp\helics:/helics -it helics/helics:helics-builder /bin/bash` <- change mounting folder if needed
